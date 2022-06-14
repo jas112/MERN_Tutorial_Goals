@@ -9,6 +9,12 @@ const getGoals =  (req, res) => {
 // @route   Post /api/goals/
 // @access  Private
 const setGoal =  (req, res) => {
+
+    if(!req.body.text){
+        res.status(400);
+        throw new Error('Please enter value in text field.')
+    }
+
     res.status(200).json({ message: 'Set Goal @ goalController' });
 }
 
