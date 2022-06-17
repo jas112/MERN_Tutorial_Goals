@@ -93,7 +93,7 @@ const getMe = asyncHandler(async (req, res) => {
         email
     });
 
-    res.json({ message : 'User data @ userController'});
+    // res.json({ message : 'User data @ userController'});
 });
 
 // Generate JWT
