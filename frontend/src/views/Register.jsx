@@ -42,7 +42,7 @@ function Register() {
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
-      [e.target.firstName]: e.target.value,
+      [e.target.name]: e.target.value,
     }));
   };
 
@@ -87,6 +87,7 @@ function Register() {
               name='firstName' 
               value={firstName} 
               placeholder='Enter your first name.' 
+              autoComplete="on"
               onChange={onChange} 
             />
           </div>
@@ -98,6 +99,7 @@ function Register() {
               name='lastName' 
               value={lastName} 
               placeholder='Enter your last name.' 
+              autoComplete="on"
               onChange={onChange} 
             />
           </div>
@@ -109,6 +111,7 @@ function Register() {
               name='email' 
               value={email} 
               placeholder='Enter your email.' 
+              autoComplete="on"
               onChange={onChange} />
           </div>
           <div className="form-group">
@@ -118,7 +121,8 @@ function Register() {
               id='password' 
               name='password' 
               value={password} 
-              placeholder='Enter your password.' 
+              placeholder='Enter your password.'
+              autoComplete="on"
               onChange={onChange} 
             />
           </div>
@@ -130,6 +134,7 @@ function Register() {
               name='passwordConfirm' 
               value={passwordConfirm} 
               placeholder='Confirm your password.' 
+              autoComplete="on"
               onChange={onChange} 
             />
           </div>
