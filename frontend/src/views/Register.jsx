@@ -1,6 +1,11 @@
 import React from 'react';
-import {useState, useEffect} from 'react';
-import {FaUser} from 'react-icons/fa';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { FaUser } from 'react-icons/fa';
+import { register, reset } from '../features/auth/authSlice';
+import Spinner from '../components/Spinner';
 
 function Register() {
 
@@ -14,6 +19,26 @@ function Register() {
 
   const {firstName, lastName, email, password, passwordConfirm} = formData;
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const {user, isLoading, isError, isSuccess, message} = useSelector(
+    (state) => state.auth
+    );
+
+  useEffect(() => {
+    if(isError){
+      toast.error(message);
+    }
+
+    if (isSuccess || user) {
+      navigate('/');
+    }
+
+    dispatch(reset());
+
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
+
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -23,7 +48,25 @@ function Register() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    if (password !== passwordConfirm) {
+      toast.error('Password confimation has failed. Password snd Password Confirm do not match.')
+    }else{
+      const userData = {
+        firstName,
+        lastName,
+        email,
+        password
+      }
+
+      dispatch(register(userData));
+
+    }
   };
+
+  if(isLoading){
+    return <Spinner/>
+  }
 
   return (
     <>
@@ -44,22 +87,26 @@ function Register() {
               name='firstName' 
               value={firstName} 
               placeholder='Enter your first name.' 
-              onChange={onChange} />
+              onChange={onChange} 
+            />
           </div>
           <div className="form-group">
             <input 
               type="text" 
               className='form-control' 
-              id='lastName' name='lastName' 
+              id='lastName' 
+              name='lastName' 
               value={lastName} 
               placeholder='Enter your last name.' 
-              onChange={onChange} />
+              onChange={onChange} 
+            />
           </div>
           <div className="form-group">
             <input 
               type="text" 
               className='form-control' 
-              id='email' name='email' 
+              id='email' 
+              name='email' 
               value={email} 
               placeholder='Enter your email.' 
               onChange={onChange} />
@@ -76,7 +123,8 @@ function Register() {
             />
           </div>
           <div className="form-group">
-            <input type="password" 
+            <input 
+              type="password" 
               className='form-control' 
               id='passwordConfirm' 
               name='passwordConfirm' 
