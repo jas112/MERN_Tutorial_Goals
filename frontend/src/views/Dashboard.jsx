@@ -3,9 +3,10 @@ import {useNavigate} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import { useEffect } from 'react';
 import GoalForm from '../components/GoalForm';
+import GoalItem from '../components/GoalItem';
 import Spinner from '../components/Spinner';
 import { getUserGoals, reset } from '../features/goals/goalSlice';
-import GoalItem from '../components/GoalItem';
+
 
 function Dashboard() {
 
@@ -48,9 +49,9 @@ function Dashboard() {
       <section className="content">
         {goals.length > 0 ? ( 
           <div className="goals">
-            {goals.map((goal) => {
+            {goals.map((goal) => (
               <GoalItem key={goal._id} goal={goal} />
-            })}
+            ))}
           </div> 
           ) : ( 
           <h3>You have no goals.</h3> 

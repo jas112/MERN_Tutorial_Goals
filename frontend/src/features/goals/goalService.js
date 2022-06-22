@@ -26,17 +26,6 @@ const getUserGoals = async (token) => {
     return response.data
 }
 
-
-// update goal
-// const updateGoal = async (goalData, token) => {
-//     const config = {
-//         headers:{
-//             Authorization: `Bearer ${token}`
-//         }
-//     }
-//     const response = await axios.put(API_URL + 'id', goalData, config);
-// }
-
 // delete goal
 const deleteGoal = async (goalId, token) => {
     const config = {
@@ -44,9 +33,9 @@ const deleteGoal = async (goalId, token) => {
             Authorization: `Bearer ${token}`
         }
     }
-    const response = await axios.delete(API_URL + 'id', goalId, config);
+    const response = await axios.delete(API_URL + goalId, config);
 
-    return response;
+    return response.data;
 }
 
 const goalService = {
