@@ -14,7 +14,7 @@ function Login() {
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
-      [e.target.email]: e.target.value,
+      [e.target.name]: e.target.value,
     }));
   };
 
